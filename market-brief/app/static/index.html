@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
+  <title>Market Brief</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to research</a>
+  <div class="page-shell">
+    <header class="masthead">
+      <h1>Market Brief</h1>
+    </header>
+    <main>
+      <details class="how-it-works"><summary>How it works</summary>
+      <ol class="workflow" aria-label="How research works">
+        <li><strong>1. Get prices</strong><p>Financial Datasets returns the stock price and daily change.</p></li>
+        <li><strong>2. Find sources</strong><p>Exa searches the last 72 hours and returns links and quoted passages.</p></li>
+        <li><strong>3. Classify passages</strong><p>Jev labels each source's relevance and whether it reports a concrete development.</p></li>
+        <li><strong>4. Build the draft</strong><p>The app sorts sources using those labels and dates. You review uncertain sources.</p></li>
+      </ol>
+      <p class="helper">Price refreshes, ticker lookups, research, and reclassification use your provider API credits.</p>
+      </details>
+      <section class="market-panel" aria-labelledby="watchlist-heading">
+        <div class="section-bar"><h2 id="watchlist-heading" class="eyebrow">Latest quotes</h2><button id="check-prices" type="button" disabled>Refresh prices</button></div>
+        <p id="price-reason" class="helper">Loading local configuration...</p>
+        <form id="ticker-form" class="ticker-form">
+          <label for="ticker-input">US ticker</label>
+          <input id="ticker-input" name="ticker" placeholder="e.g. MSFT" maxlength="12" required autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="ticker-reason" disabled>
+          <button id="add-ticker" type="submit" disabled>Add ticker</button>
+          <p id="ticker-reason" class="helper"></p>
+        </form>
+        <div id="watchlist" class="watchlist" aria-label="Choose a company"></div>
+        <div class="quote-toolbar">
+          <div id="quote-summary" class="quote-summary">No captured quote selected.</div>
+          <div class="action-group"><button id="inspect-quote" type="button" class="quiet" disabled>Inspect quote</button><button id="research" type="button" class="primary" disabled>Research company</button></div>
+        </div>
+        <p id="research-reason" class="helper">Research requires a validated stored quote.</p>
+      </section>
+      <div class="archive-bar">
+        <div><label for="saved-runs">Saved research</label></div>
+        <select id="saved-runs"><option value="">Open a saved run...</option></select>
+        <button id="refresh-runs" class="quiet" type="button">Refresh list</button>
+      </div>
+      <div id="error" class="error-banner" role="alert" hidden></div>
+      <section class="run-strip" aria-label="Research status">
+        <div><span id="run-mode" class="badge"></span><strong id="run-title">No run selected</strong></div>
+        <p id="run-status" role="status" aria-live="polite">Select a stock, then click Research.</p>
+        <p id="run-meta" class="helper"></p>
+      </section>
+      <section id="run-quote" class="run-quote" aria-label="Quote used for this run" hidden></section>
+      <div id="warnings" aria-label="Run warnings"></div>
+      <details id="sources-disclosure" class="sources-disclosure">
+        <summary><span id="evidence-heading">Exa Sources &amp; Jev Classifications</span><span id="source-count" class="count">0 sources</span></summary>
+         <section class="evidence-column" aria-labelledby="evidence-heading">
+          <div id="evidence"><div class="empty-state"><p>Sources will appear after you research a company.</p></div></div>
+        </section>
+        <div id="reclassify-controls" class="reclassify-controls" hidden>
+          <button id="reclassify" type="button" disabled>Reclassify saved evidence</button>
+          <p id="reclassify-reason" class="helper"></p>
+        </div>
+      </details>
+      <div id="workspace" class="workspace" tabindex="-1">
+        <section class="briefing-column" aria-labelledby="briefing-heading">
+          <div class="column-heading"><h2 id="briefing-heading">Briefing</h2><span class="draft-label">Draft</span></div>
+          <div class="export-bar" aria-label="Export briefing"><a id="export-md" class="button quiet" aria-disabled="true">Export Markdown</a><a id="export-json" class="button quiet" aria-disabled="true">Export JSON</a></div>
+          <div id="briefing"><div class="empty-state brief-empty"><p>No briefing yet.</p></div></div>
+          <p class="disclaimer">Reported news, not a confirmed explanation of the price move.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <dialog id="inspector" aria-labelledby="inspector-title">
+    <div class="drawer-head"><h2 id="inspector-title">Inspect evidence</h2><button id="close-inspector" class="quiet" type="button" aria-label="Close inspector">Close</button></div>
+    <div id="inspector-subtitle" class="drawer-subtitle"></div>
+    <div id="inspector-tabs" class="tabs" role="tablist" aria-label="Inspection views"></div>
+    <div id="inspector-content" class="drawer-content" role="tabpanel" tabindex="0"></div>
+  </dialog>
+</body>
+</html>

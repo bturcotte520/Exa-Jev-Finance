@@ -1,0 +1,11 @@
+{
+  "fixture_notice": "SYNTHETIC TEST DATA. Not an actual provider response or market quote.",
+  "snapshot": {
+    "ticker": "NVDA",
+    "price": 103,
+    "day_change": 3,
+    "day_change_percent": 3,
+    "time": "2026-11-05T16:00:00Z",
+    "time_milliseconds": 1793894400000
+  }
+}
